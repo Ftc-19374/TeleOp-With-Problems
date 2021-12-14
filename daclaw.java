@@ -53,17 +53,14 @@ public class daclaw extends LinearOpMode {
             b2 = gamepad2.b;
 
             //Opening/closing claw
-            if(a1 && clawon){
+            if(a1){
                 motor1.setPower(0.25);
-                clawon = false;
-            }
-            if(b1 && clawon){
+            } else if(b1){
                 motor1.setPower(-0.25);
-                clawon = false;
-            }
-            if((a1 && !clawon) || (b1 && !clawon)){
+                
+            } else{
+                //This made sure that the power of the motor is not affected and aimed to reduce stuttering
                 motor1.setPower(0);
-                clawon = true;
             }
             //Moves lift based on button
             if(a2){
@@ -136,12 +133,14 @@ public class daclaw extends LinearOpMode {
                 frontRight.setPower(Range.clip(x2, -1.0, 1.0));
                 backLeft.setPower(Range.clip(x2, -1.0, 1.0));
                 backRight.setPower(Range.clip(x2, -1.0, 1.0));
+            }else{
+                //This made sure that the power of the motors are not affected and aimed to reduce stuttering
+                frontLeft.setPower(0);
+                frontRight.setPower(0);
+                backLeft.setPower(0);
+                backRight.setPower(0);
+                wheel.setPower(0);
             }
-            frontLeft.setPower(0);
-            frontRight.setPower(0);
-            backLeft.setPower(0);
-            backRight.setPower(0);
-            wheel.setPower(0);
         }
     }
     public void movingvoid(double ticks){
